@@ -1,0 +1,42 @@
+﻿@model IEnumerable<StudentViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Student List</h1>
+
+<p>
+    <a asp-action="CreateStudent" class="btn btn-info">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Student Id
+            </th>
+            <th>
+                Student Name
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Student_Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditStudent", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "StudentDetail", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Remove_Student", new { id = item.ID }, new { onclick = "return confirm('Are you sure to delete this country?');" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

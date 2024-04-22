@@ -1,0 +1,64 @@
+﻿@model CreateStudentViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Add New Student</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateStudent" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Student_name " class="control-label"></label>
+                <input asp-for="Student_name" class="form-control" />
+                <span asp-validation-for="Student_name" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="Permanent_Address.Address_streetline1" class="control-label">Address_streetline-1</label>
+                <input asp-for="Permanent_Address.Address_streetline1" class="form-control" />
+                <span asp-validation-for="Permanent_Address.Address_streetline1" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="Permanent_Address.Address_streetline2" class="control-label">Address_streetline-2</label>
+                <input asp-for="Permanent_Address.Address_streetline2" class="form-control" />
+                <span asp-validation-for="Permanent_Address.Address_streetline2" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="Permanent_Address.Pincode" class="control-label">PinCode</label>
+                <input asp-for="Permanent_Address.Pincode" class="form-control" />
+                <span asp-validation-for="Permanent_Address.Pincode" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <label class="control-label">Skills</label>
+                @for (int i = 0; i < Model.Skilllist.Count;i++)
+                {
+                    <div class="col-md-6">
+                        <input type="hidden" asp-for="@Model.Skilllist[i].Skillid"/>
+                        <input asp-for="@Model.Skilllist[i].IsChecked"/>
+                        @Model.Skilllist[i].SkillName
+                    </div>
+                    @if((i+1)%2==0){
+                        @:</div><div class="row">
+                    }
+                }
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        // await Html.RenderPartialAsync("_ValidationScriptsPartial");
+            <partial name="_ValidationScriptsPartial"/>
+    }
+}

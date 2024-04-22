@@ -1,0 +1,50 @@
+﻿@model IEnumerable<ConcertBooking_WebApp.Models.ViewModel.ArtistViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Artist</a>
+</p>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+               ID
+            </th>
+            <th>
+                 Artist Name
+            </th>
+            <th>
+              BIO
+            </th>
+            <th>
+                Image
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Artist_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bio)
+            </td>
+            <td>
+                    <img src="@item.ImageUrl" width="64" height="64" />
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "UpdateArtist", new {id=item.Id}) |
+                    @Html.ActionLink("Details", "Details", new {id=item.Id}) |
+                    @Html.ActionLink("Delete", "Delete", new {id=item.Id})
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

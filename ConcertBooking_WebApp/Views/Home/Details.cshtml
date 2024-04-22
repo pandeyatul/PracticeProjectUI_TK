@@ -1,0 +1,25 @@
+﻿@model ConcertViewModel
+@{
+    ViewData["Title"] = "Concert Details";
+}
+<div class="row mt-5">
+    <div class="col-6">
+        <img src="@Model.ImageUrl" style="height:450px;width:450px" alt="Concert Image" />
+    </div>
+    <div class="col-6">
+        <div><h6>Concert Name: </h6> @Model.Concert_Name</div>
+        <div><h6>Description: </h6> @Model.Description</div>
+        <div><h6>Venue Name: </h6> @Model.VenueName</div>
+        <div><h6>Venue Address: </h6> @Model.VenueAddress</div>
+        <div><h6>Venue Date & Time: </h6> @Model.DateTime.ToString("dd MMM yyyy HH:MM ")</div>
+        <div class="mt-4">
+            <img src="@Model.ArtistImageUrl" class="rounded-circle img-fluid" style="height:150px;width:150px" />
+        </div>
+        <div><h3>Artist Name: </h3> @Model.ArtistName</div>
+        <div class="mt-4">
+            <a class="btn btn-danger" asp-action="GetAvailableTickets" asp-controller="home" asp-route-id="@Model.Id">See Available Tickets</a>
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ConcertBooking_WebApp.Models.ViewModel.ConcertViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<p>
+    <a asp-action="Create" class="btn btn-success">Create New Concert</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Concert Name
+            </th>
+            <th>
+                Venue Name
+            </th>
+            <th>
+                Date & Time
+            </th>
+            <th>
+               Artist Name
+            </th>
+            <th>
+                Concert Image
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Concert_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VenueName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArtistName)
+            </td>
+                <td>
+                    <img src="@item.ImageUrl" width="64" height="64" />
+                </td>
+            <td>
+                    @Html.ActionLink("Edit", "Edit", new {id=item.Id }) |
+                    @Html.ActionLink("Get Ticket Details", "GetTicketDetails", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new {id=item.Id },new{onclick="return confirm('Are you sure to delete this item?');"})
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

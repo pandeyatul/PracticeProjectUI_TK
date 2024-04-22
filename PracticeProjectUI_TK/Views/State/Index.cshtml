@@ -1,0 +1,48 @@
+﻿@model IEnumerable<StateViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>States List</h1>
+
+<p>
+    <a asp-action="CreateState" class="btn btn-info">Create New State</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               ID
+            </th>
+            <th>
+               State Name
+            </th>
+            <th>
+                Country Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StateId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem =>item.State_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem =>item.Country_Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "CreateState", new {  id=item.StateId  }) |
+                    @Html.ActionLink("Details", "Details", new {id=item.StateId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.StateId },new{onclick="return confirm('Are you sure to remove this state?');"})
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

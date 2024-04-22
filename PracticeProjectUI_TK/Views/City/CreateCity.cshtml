@@ -1,0 +1,50 @@
+﻿@model CityViewModel
+
+@{
+    ViewData["Title"] = "CreateCity";
+}
+
+<h1>Create New City</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateCity">
+            <input type="hidden" asp-for="City_id" class="form-control" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label class="control-label">Country Name</label>
+                <select asp-for="Countryid" asp-items="Model.countries" class="form-select single-select dropdown">
+                    <option selected disabled>Choose Country</option>
+                </select>
+                <span asp-validation-for="Countryid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">State Name</label>
+                <select asp-for="state_id" asp-items="Model.States" class="form-select single-select dropdown">
+                    <option selected disabled>Choose State</option>
+                </select>
+                <span asp-validation-for="state_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="City_name" class="control-label">City Name</label>
+                <input asp-for="City_name" class="form-control" />
+                <span asp-validation-for="City_name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

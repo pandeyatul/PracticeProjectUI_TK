@@ -1,0 +1,58 @@
+﻿@model IEnumerable<CityViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>City List</h1>
+
+<p>
+    <a asp-action="CreateCity" class="btn btn-info">Add New City</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                City Name
+            </th>
+            <th>
+                State Name
+            </th>
+            <th>
+                Country Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                   @* @Html.DisplayFor(modelItem => item.City_id)*@
+                   @item.City_id
+                </td>
+                <td>
+                   @* @Html.DisplayFor(modelItem =>item.City_name)*@
+                    @(!string.IsNullOrEmpty(item.City_name) ? item.City_name : "N/A")
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem =>item.StateName)*@
+                    @(!string.IsNullOrEmpty(item.StateName) ? item.StateName : "N/A")
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem =>item.Country_Name)*@
+                    @(!string.IsNullOrEmpty(item.Country_Name) ? item.Country_Name : "N/A")
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "CreateCity", new {  id=item.City_id  }) |
+                    @Html.ActionLink("Details", "Details", new {id=item.City_id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.City_id },new{onclick="return confirm('Are you sure to remove this City?');"})
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

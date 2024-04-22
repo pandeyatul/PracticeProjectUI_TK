@@ -1,0 +1,41 @@
+﻿
+@model IEnumerable<CountryViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Countries List</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-info">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th> 
+                Country Id
+            </th>
+            <th>
+                 Country Name
+            </th>
+            <th>Action</th>
+        </tr>   
+    </thead>
+    <tbody>
+@foreach (var item in Model)
+{
+        <tr>
+            <td>
+                    @Html.DisplayFor(modelItem =>item.CountryId)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem =>item.CountryName)
+            </td>
+            <td>
+                <partial name="_ActionLink" model="@item.CountryId"/>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

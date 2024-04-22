@@ -1,0 +1,35 @@
+﻿@model Entities_TK.Users
+
+<h4>Login</h4>
+<hr />
+
+
+<div class="row">
+    <div style="background-color:lightcoral"><p>@ViewBag.Message</p></div>
+    <div class="col-md-4">
+        <form asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Passowrd" class="control-label"></label>
+                <input asp-for="Passowrd"type="password" class="form-control" />
+                <span asp-validation-for="Passowrd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="RegisterUser">Register</a>
+</div>
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

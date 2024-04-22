@@ -1,0 +1,56 @@
+﻿@model CreateStudentViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Student Details</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Student_name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Student_name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Permanent_Address.Address_streetline1)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Permanent_Address.Address_streetline1)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Permanent_Address.Address_streetline2)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Permanent_Address.Address_streetline2)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Permanent_Address.Pincode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Permanent_Address.Pincode)
+        </dd>
+        <div class="row">
+            <div class="col-md-6">
+                <h5>Skills: </h5>
+                @foreach (var skill in Model.Skilllist)
+                {
+                    <div>@string.Join(",", skill.SkillName)</div>
+                }
+            </div>
+        </div>
+    </dl>
+</div>
+<div>
+    @* @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) | *@
+    <a asp-action="Index">Back to List</a>
+</div>

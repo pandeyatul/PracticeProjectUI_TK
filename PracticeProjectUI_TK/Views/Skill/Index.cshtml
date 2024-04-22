@@ -1,0 +1,58 @@
+﻿@model PagingSkillViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Skill List</h1>
+<div class="row">
+    <div class="col-5">
+        <p>
+            <a asp-action="Create_Skill" class="btn btn-info">Create New</a>
+        </p>
+    </div>
+    <div class="col-7">
+        <form asp-action="Index" method="post">
+            <input type="text" name="searchItem" placeholder="Search Here..."value="@ViewData["filterdata"]" />
+            <button type="submit" value="Search">Search</button>
+        </form>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-route-sortOrder="@ViewData["IdSort"]">Skill Id</a>
+            </th>
+            <th>
+                <a asp-route-sortOrder="@ViewData["SkillSort"]">Skill Name</a>
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.SkillList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Skill_Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SkillName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Update_Skill", new { id = item.Skill_Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Skill_Id }) |
+                    @Html.ActionLink("Delete", "Remove_Skill", new { id = item.Skill_Id }, new { onclick = "return confirm('Are you sure to delete this country?');" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@{
+    var previous = Model.pageInfo.Previous ? "" : "disabled";
+    var next = Model.pageInfo.Next ? "" : "disabled";
+}
+<a class="btn btn-warning @previous" asp-route-pageno="@(Model.pageInfo.PageNumber-1)" asp-route-Filtertext="@ViewData["filterdata"]" asp-route-sortOrder="@ViewData["Sorting"]">Pre</a>
+<a class="btn btn-warning @next" asp-route-pageno="@(Model.pageInfo.PageNumber+1)" asp-route-Filtertext="@ViewData["filterdata"]" asp-route-sortOrder="@ViewData["Sorting"]">Next</a>

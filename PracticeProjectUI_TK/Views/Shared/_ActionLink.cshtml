@@ -1,0 +1,5 @@
+﻿@model int
+
+@Html.ActionLink("Edit", "Create", new {  id=Model  }) |
+@Html.ActionLink("Details", "Details", new { id=Model  }) |
+@Html.ActionLink("Delete", "Delete", new { id=Model },new{onclick="return confirm('Are you sure to delete this country?');"})

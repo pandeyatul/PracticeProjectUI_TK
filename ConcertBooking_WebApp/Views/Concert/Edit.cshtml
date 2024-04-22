@@ -1,0 +1,68 @@
+﻿@model ConcertBooking_WebApp.Models.ViewModel.EditConcertModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>EditConcertModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <img src="@Model.ImageUrl" height="100" width="100"/>
+    </div>
+    <div class="col-md-8">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="Id" type="hidden" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ConcertName" class="control-label"></label>
+                <input asp-for="ConcertName" class="form-control" />
+                <span asp-validation-for="ConcertName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" class="form-control" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateTime" class="control-label"></label>
+                <input asp-for="DateTime" class="form-control" />
+                <span asp-validation-for="DateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <select asp-for="VenueId" asp-items="@ViewBag.Venulist">
+                    <option selected disabled>Select Venue</option>
+                </select>
+                <a asp-action="Create" asp-controller="Venue" class="btn btn-success">Add Venue</a>
+                <span asp-validation-for="VenueId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <select asp-for="ArtistId" asp-items="@ViewBag.Artist">
+                    <option selected disabled>Select Artist</option>
+                </select>
+                <a asp-action="Create" asp-controller="Artist" class="btn btn-success">Add Artist</a>
+                <span asp-validation-for="ArtistId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

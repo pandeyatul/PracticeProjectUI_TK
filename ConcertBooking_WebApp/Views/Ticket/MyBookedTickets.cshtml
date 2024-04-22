@@ -1,0 +1,42 @@
+﻿@model IEnumerable<BookedViewModel>
+@{
+    ViewData["Title"] = "MyBookedTickets";
+}
+<h1>My Booked Tickets</h1>
+@if(Model==null || !Model.Any()){
+    <div class="alert alert-warning">
+        <h4 class="Text-danger">You have No Booked any tickets!</h4>
+    </div>
+}
+else
+{
+  foreach(var item in Model)
+  {
+      <div class="card mb-3" id="book-@item.BookingId">
+          <div class="card-header">
+              Booking Id:@item.BookingId, Booking Date: @item.BookingDate.ToString("dd/mm/yyyy")
+          </div>
+          <div class="card-body">
+              <h5 class="card-title">Concert: @item.ConcertName</h5>
+              <ul>
+                  @foreach(var tikets in item.mytickets)
+                  {
+                      <li class="list-group-item">Seat Number: @tikets.BookedSeatNumber</li>
+                  }
+              </ul>
+          </div>
+          <div class="card-footer">
+              <button class="btn btn-primary" onclick="printTicket('@item.BookingId')">Print Ticket</button>
+          </div>
+      </div>
+  }
+}
+<script>
+    function printTicket(bookingId)
+    {
+        var element=document.getElementById('book-'+bookingId);
+        element.classList.add('print-section');
+        window.print();
+        element.classList.remove('print-section');
+    }
+</script>
