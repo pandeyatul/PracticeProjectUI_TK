@@ -33,7 +33,7 @@ namespace PracticeProjectUI_TK.Controllers
                         City_id = cityitem.Id,
                         City_name = cityitem.city_Name,
                         StateName = statedata?.Where(s => s.Id == cityitem.StateID).Select(n => n.State_Name).FirstOrDefault(),
-                        Country_Name = countrydata?.Where(y => y.Id == cityitem?.State?.Country_ID).Select(x => x.Country_Name).FirstOrDefault()
+                        Country_Name = countrydata?.Where(y => y.Id == cityitem?.State?.CountryID).Select(x => x.Country_Name).FirstOrDefault()
                     };
                     citylist.Add(citys);
                 }

@@ -31,7 +31,7 @@ namespace TK_Repository
 
         public List<City> GetAllCity()
         {
-            var cities =  _dbContext.cityTbl?.Include(s => s.State).ThenInclude(c => c.Countries).ToList(); 
+            var cities =  _dbContext.cityTbl?.Include(s => s.State).ThenInclude(c => c.Country).ToList(); 
             if (cities != null)
             {
                 return cities;

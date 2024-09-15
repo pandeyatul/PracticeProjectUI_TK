@@ -15,10 +15,12 @@ namespace PracticeProjectUI_TK.Data
         public DbSet<Users>? UsersTbl { get; set; }
         public DbSet<Student> StudentTbl { get; set; }
         public DbSet<Skills> SkillsTbl { get; set; }
+        public DbSet<Taxpayer> TaxpayerTbl { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<StudentSkill>().HasKey(x =>new { x.StudentsId,x.SkillId });
+
             base.OnModelCreating(modelBuilder);
         }
     }

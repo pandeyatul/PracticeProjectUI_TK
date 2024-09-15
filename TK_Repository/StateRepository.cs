@@ -32,7 +32,7 @@ namespace TK_Repository
 
         public List<State>? GetAllState()
         {
-            var states = _context?.stateTbl?.Include(x => x.Countries).ToList();
+            var states = _context?.stateTbl?.Include(x => x.Country).ToList();
             return states;
         }
 

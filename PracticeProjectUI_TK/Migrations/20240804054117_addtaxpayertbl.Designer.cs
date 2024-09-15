@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PracticeProjectUI_TK.Data;
 
@@ -11,9 +12,10 @@ using PracticeProjectUI_TK.Data;
 namespace PracticeProjectUI_TK.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240804054117_addtaxpayertbl")]
+    partial class addtaxpayertbl
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,17 +94,21 @@ namespace PracticeProjectUI_TK.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<decimal?>("MPAmount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Month")
+                    b.Property<string>("MPAmount")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal?>("SLCSP")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("Month")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal?>("TaxCredit")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("SLCSP")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TaxCredit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("TaxpayerId")
                         .HasColumnType("int");
@@ -199,17 +205,37 @@ namespace PracticeProjectUI_TK.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<DateTime>("DOB")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Identifier")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("IsReceiveForm1095")
+                    b.Property<string>("IndividualName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IndividualSSN")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsReceiveForm1095")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Policynumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SSN")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -251,7 +277,7 @@ namespace PracticeProjectUI_TK.Migrations
             modelBuilder.Entity("Entities_TK.Monthly_Premium_Information", b =>
                 {
                     b.HasOne("Entities_TK.Taxpayer", null)
-                        .WithMany("MonthlyInfo")
+                        .WithMany("Monthly_Premium_Information")
                         .HasForeignKey("TaxpayerId");
                 });
 
@@ -318,7 +344,7 @@ namespace PracticeProjectUI_TK.Migrations
 
             modelBuilder.Entity("Entities_TK.Taxpayer", b =>
                 {
-                    b.Navigation("MonthlyInfo");
+                    b.Navigation("Monthly_Premium_Information");
                 });
 #pragma warning restore 612, 618
         }

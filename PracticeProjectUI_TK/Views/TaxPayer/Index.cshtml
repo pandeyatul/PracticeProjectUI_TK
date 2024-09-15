@@ -1,0 +1,45 @@
+﻿@model IEnumerable<TaxpayerViewModel>;
+@{
+    ViewData["Title"] = "Index";
+}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<h1>Tax payer data</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <a asp-action="Save" asp-controller="TaxPayer">Add Another +</a>
+            <table class="table table-bordered table-striped" id="taxpayertbl">
+                <thead>
+                    <tr>
+                        <th>Policy Number</th>
+                        <th>Identifier</th>
+                        <th>All annual TaxCredit Amount</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td id="identifier">@item.Identifier</td>
+                                <td id="policyno">@item.Policynumber</td>
+                                <td id="taxcredit">@item.AnnualTaxCreditAmmount</td>
+                                <td>
+                                    <a class="btn btn-primary" onclick="GetById('@item.Id');">Update</a>
+                                    <a class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="~/js/taxpayer.js"></script>
+

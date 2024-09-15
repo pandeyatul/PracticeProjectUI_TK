@@ -29,7 +29,7 @@ namespace PracticeProjectUI_TK.Controllers
                     {
                         StateId = stateitem.Id,
                         State_Name = stateitem.State_Name,
-                        Country_Name = counries?.Where(x => x.Id == stateitem.Country_ID).Select(c => c.Country_Name).FirstOrDefault()
+                        Country_Name = counries?.Where(x => x.Id == stateitem.CountryID).Select(c => c.Country_Name).FirstOrDefault()
                     };
                     listofstate.Add(rajya);
                 }
@@ -52,7 +52,7 @@ namespace PracticeProjectUI_TK.Controllers
                         Value = c.Id.ToString()
                     });
                     stateView.State_Name = statedata?.State_Name;
-                    stateView.Country_ID = statedata.Country_ID;
+                    stateView.Country_ID = statedata.CountryID;
                     stateView.StateId = statedata.Id;
                     // stateView.Country_Name = counries?.Where(x => x.Id == statedata?.Country_ID).Select(c => c.Country_Name).FirstOrDefault();
                 }
@@ -84,7 +84,7 @@ namespace PracticeProjectUI_TK.Controllers
             {
                 Id = statemodel.StateId,
                 State_Name = statemodel.State_Name,
-                Country_ID = statemodel.Country_ID
+                CountryID = statemodel.Country_ID
             };
             if (state != null)
             {

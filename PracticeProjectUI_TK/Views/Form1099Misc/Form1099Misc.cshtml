@@ -1,0 +1,226 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form 1099-MISC</title>
+    @* <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> *@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container my-5">
+        <h1 class="text-left text-primary">Form 1099-MISC</h1>
+        <h4 class="text-center text-secondary mb-4">Miscellaneous Income</h4>
+
+        <!-- Bootstrap Accordion -->
+        <div class="accordion" id="formAccordion">
+
+            <!-- Payer Information -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingPayer">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePayer" aria-expanded="true" aria-controls="collapsePayer">
+                        Payer Information
+                    </button>
+                </h2>
+                <div id="collapsePayer" class="accordion-collapse collapse show" aria-labelledby="headingPayer" data-bs-parent="#formAccordion">
+                    <div class="accordion-body">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label for="payer-name" class="form-label">Payer's Name</label>
+                                <input type="text" class="form-control" id="payer-name" name="payer-name" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="payer-address" class="form-label">Payer's Address</label>
+                                <input type="text" class="form-control" id="payer-address" name="payer-address" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="payer-tin" class="form-label">Payer's TIN</label>
+                                <input type="text" class="form-control" id="payer-tin" name="payer-tin" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recipient Information -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingRecipient">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRecipient" aria-expanded="false" aria-controls="collapseRecipient">
+                        Recipient Information
+                    </button>
+                </h2>
+                <div id="collapseRecipient" class="accordion-collapse collapse" aria-labelledby="headingRecipient" data-bs-parent="#formAccordion">
+                    <div class="accordion-body">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                @* <a href="#" onclick="binddropdown();">Click here to get Recipient data</a> *@
+                                <label for="recipient-name" class="form-label">Recipient's Name</label>
+                                <select class="form-select" id="recipient-name" name="recipient-name" required>
+                                    <option value="" disabled selected>Select Recipient's Name</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="recipient-address" class="form-label">Recipient's Address</label>
+                                <select class="form-select" id="recipient-address" name="recipient-address" required>
+                                    <option value="" disabled selected>Select Recipient's Address</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="recipient-tin" class="form-label">Recipient's TIN</label>
+                                <select class="form-select" id="recipient-tin" name="recipient-tin" required>
+                                    <option value="" disabled selected>Select Recipient's TIN</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Income Details -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingIncome">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseIncome" aria-expanded="false" aria-controls="collapseIncome">
+                    Income Details (Boxes 1 to 15)
+                </button>
+            </h2>
+            <div id="collapseIncome" class="accordion-collapse collapse" aria-labelledby="headingIncome" data-bs-parent="#formAccordion">
+                <div class="accordion-body">
+                    <!-- First Row -->
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="box1" class="form-label">Rents (Box 1)</label>
+                            <input type="text" class="form-control" id="rent" name="box1" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="box2" class="form-label">Royalties (Box 2)</label>
+                            <input type="text" class="form-control" id="royalties" name="box2">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="box3" class="form-label">Other Income (Box 3)</label>
+                            <input type="text" class="form-control" id="otherincome" name="box3">
+                        </div>
+                    </div>
+
+                    <!-- Second Row -->
+                    <div class="row g-3 mt-3">
+                        <div class="col-md-4">
+                            <label for="box4" class="form-label">Federal Income Tax Withheld (Box 4)</label>
+                            <input type="text" class="form-control" id="Federalwithheld" name="box4">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="box5" class="form-label">Fishing Boat Proceeds (Box 5)</label>
+                            <input type="text" class="form-control" id="fishingboat" name="box5">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="box6" class="form-label">Medical and Health Care Payments (Box 6)</label>
+                            <input type="text" class="form-control" id="healthcare" name="box6">
+                        </div>
+                    </div>
+
+                    <!-- Third Row -->
+                    <div class="row g-3 mt-3">
+                        <div class="col-md-4">
+                            <label for="box7" class="form-label">Nonemployee Compensation (Box 7)</label>
+                            <input type="text" class="form-control" id="nonempcompensation" name="box7">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="box8" class="form-label">Substitute Payments in Lieu of Dividends or Interest (Box 8)</label>
+                            <input type="text" class="form-control" id="lieuofdividend" name="box8">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="box9" class="form-label">Crop Insurance Proceeds (Box 9)</label>
+                            <input type="text" class="form-control" id="cropinsurance" name="box9">
+                        </div>
+                    </div>
+
+                    <!-- Fourth Row -->
+                    <div class="row g-3 mt-3">
+                        <div class="col-md-4">
+                            <label for="box10" class="form-label">Gross Proceeds Paid to an Attorney (Box 10)</label>
+                            <input type="text" class="form-control" id="attorney" name="box10">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="box11" class="form-label">Section 409A Income (Box 11)</label>
+                            <input type="text" class="form-control" id="sec409aincome" name="box11">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="box12" class="form-label">Excess Golden Parachute Payments (Box 12)</label>
+                            <input type="text" class="form-control" id="parachutepayment" name="box12">
+                        </div>
+                    </div>
+
+                    <!-- Fifth Row -->
+                    <div class="row g-3 mt-3">
+                        <div class="col-md-4">
+                            <label for="box13" class="form-label">Nonqualified Deferred Compensation (Box 13)</label>
+                            <input type="text" class="form-control" id="nonqdeferredcomp" name="box13">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="box14" class="form-label">State Tax Withheld (Box 14)</label>
+                            <input type="text" class="form-control" id="statewithheld" name="box14">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="box15" class="form-label">State/Payer's State Number (Box 15)</label>
+                            <input type="text" class="form-control" id="payerstateno" name="box15">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- State Information -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingState">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseState" aria-expanded="false" aria-controls="collapseState">
+                    State Information
+                </button>
+            </h2>
+            <div id="collapseState" class="accordion-collapse collapse" aria-labelledby="headingState" data-bs-parent="#formAccordion">
+                <div class="accordion-body">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="state-1" class="form-label">State 1</label>
+                            <input type="text" class="form-control" id="state" name="state-1">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="state-1-id" class="form-label">State 1 ID Number</label>
+                            <input type="text" class="form-control" id="stateidno" name="state-1-id">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="state-1-amount" class="form-label">State 1 Amount</label>
+                            <input type="text" class="form-control" id="stateamount" name="state-1-amount">
+                        </div>
+                    </div>
+                    <div class="row g-3 mt-3">
+                        <div class="col-md-4">
+                            <label for="state-2" class="form-label">State 2</label>
+                            <input type="text" class="form-control" id="state-2" name="state-2">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="state-2-id" class="form-label">State 2 ID Number</label>
+                            <input type="text" class="form-control" id="state-2-id" name="state-2-id">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="state-2-amount" class="form-label">State 2 Amount</label>
+                            <input type="text" class="form-control" id="state-2-amount" name="state-2-amount">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Submit Button -->
+    <section class="text-center mt-4">
+        <button type="submit" onclick="Save();" class="btn btn-primary">Submit Form</button>
+    </section>
+    </div>
+
+    <!-- Bootstrap JS -->
+    @*  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script> *@
+</body>
+</html>
+<script src="~/js/form1099misc.js"></script>

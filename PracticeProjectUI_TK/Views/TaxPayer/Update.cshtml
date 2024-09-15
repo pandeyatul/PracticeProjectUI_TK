@@ -1,0 +1,200 @@
+﻿@model TaxpayerViewModel
+
+@{
+    ViewData["Title"] = "Update";
+}
+<style>
+    .view {
+        display: none;
+    }
+
+        .view.active {
+            display: block;
+        }
+
+    .navigation {
+        margin-bottom: 20px;
+    }
+
+</style>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<h1> Save</h1>
+<p></p>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <a class="btn btn-primary" id="getbtn" asp-action="index" asp-controller="TaxPayer">Get Data</a>
+        <div id="view1" class="view active">
+
+            <div class="form-group form-check">
+                <label><input type="radio" checked name="form1095" value="Yes"> Yes,I received form 1095-A</label><br>
+                <label><input type="radio" name="form1095" value="No"> No,I didn't received form 1095-A</label><br>
+            </div>
+            <button class="btn-primary" type="button" id="continue-1">Continue</button>
+        </div>
+        <div id="view2" class="view">
+            <b>Part I: Recipient Information</b><br />
+
+            <div>
+                <input type="hidden" asp-for="Id" id="taxpayerid" />
+                <label asp-for="Identifier" class="control-label"></label>
+                <input asp-for="Identifier" id="identifier" class="form-control" />
+                <span asp-validation-for="Identifier" id="spnidentifier" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Policynumber" class="control-label"></label>
+                <input asp-for="Policynumber" id="policyno" class="form-control" />
+                <span asp-validation-for="Policynumber" id="sppolicyno" class="text-danger"></span>
+            </div>
+
+            <button class="btn btn-primary" id="back-2">Back</button>
+            <button type="button" class="btn btn-primary" id="continue2">Continue</button>
+        </div>
+    </div>
+
+    <div id="view3" class="view">
+        <b> Monthly Premium Information </b><br />
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Month</th>
+                    <th>Monthly Premium Amount</th>
+                    <th>Second Lowest Cost Silver Plan</th>
+                    <th>Advanced Payment of Premium Tax Credit</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="premiumtbody">
+          
+                    <tr>
+                        <td id="month">January</td>
+                        <td><input id="MPAmount" asp-for="MonthlyInfo[0].MPAmount" placeholder="Monthly Premium Amount" /></td>
+                        <td><input id="SLCSP" asp-for="MonthlyInfo[0].SLCSP" placeholder="Second Lowest Cost Silver Plan" /></td>
+                        <td><input id="TaxCredit" asp-for="MonthlyInfo[0].TaxCredit" placeholder="Advanced Payment of Premium Tax Credit" /></td>
+                        <td><a class="btn btn-primary" id="copy">Copy</a></td>
+                        <input type="hidden" asp-for="MonthlyInfo[0].Id" id="monthid" />
+                    </tr>
+                    <tr>
+                        <td id="month">February</td>
+                        <td><input id="MPAmount" asp-for="MonthlyInfo[1].MPAmount" placeholder="Monthly Premium Amount" /></td>
+                        <td><input id="SLCSP" asp-for="MonthlyInfo[1].SLCSP" placeholder="Second Lowest Cost Silver Plan" /></td>
+                        <td><input id="TaxCredit" asp-for="MonthlyInfo[1].TaxCredit" placeholder="Advanced Payment of Premium Tax Credit" /></td>
+                        <td><a class="btn btn-primary" id="copy">Copy</a></td>
+                    <input type="hidden" asp-for="MonthlyInfo[1].Id" id="monthid" />
+                    </tr>
+                   @*  <tr>
+                        <td id="month">March</td>
+                        <td><input id="MPAmount" asp-for="MonthlyInfo[i].MPAmount" placeholder="Monthly Premium Amount" /></td>
+                        <td><input id="SLCSP" asp-for="MonthlyInfo[i].SLCSP" placeholder="Second Lowest Cost Silver Plan" /></td>
+                        <td><input id="TaxCredit" asp-for="MonthlyInfo[i].TaxCredit" placeholder="Advanced Payment of Premium Tax Credit" /></td>
+                        <td><a class="btn btn-primary" id="copy">Copy</a></td>
+                        <input type="hidden" asp-for="MonthlyInfo[i].Id" />
+                    </tr>
+                    <tr>
+                        <td id="month">April</td>
+                        <td><input id="MPAmount" asp-for="MonthlyInfo[i].MPAmount" placeholder="Monthly Premium Amount" /></td>
+                        <td><input id="SLCSP" asp-for="MonthlyInfo[i].SLCSP" placeholder="Second Lowest Cost Silver Plan" /></td>
+                        <td><input id="TaxCredit" asp-for="MonthlyInfo[i].TaxCredit" placeholder="Advanced Payment of Premium Tax Credit" /></td>
+                        <td><a class="btn btn-primary" id="copy">Copy</a></td>
+                    </tr>
+                    <tr>
+                        <td id="month">May</td>
+                        <td><input id="MPAmount" asp-for="MonthlyInfo[i].MPAmount" placeholder="Monthly Premium Amount" /></td>
+                        <td><input id="SLCSP" asp-for="MonthlyInfo[i].SLCSP" placeholder="Second Lowest Cost Silver Plan" /></td>
+                        <td><input id="TaxCredit" asp-for="MonthlyInfo[i].TaxCredit" placeholder="Advanced Payment of Premium Tax Credit" /></td>
+                        <td><a class="btn btn-primary" id="copy">Copy</a></td>
+                        <input type="hidden" asp-for="MonthlyInfo[i].Id" />
+                    </tr>
+                    <tr>
+                        <td id="month">June</td>
+                        <td><input id="MPAmount" asp-for="MonthlyInfo[i].MPAmount" placeholder="Monthly Premium Amount" /></td>
+                        <td><input id="SLCSP" asp-for="MonthlyInfo[i].SLCSP" placeholder="Second Lowest Cost Silver Plan" /></td>
+                        <td><input id="TaxCredit" asp-for="MonthlyInfo[i].TaxCredit" placeholder="Advanced Payment of Premium Tax Credit" /></td>
+                        <td><a class="btn btn-primary" id="copy">Copy</a></td>
+                        <input type="hidden" asp-for="MonthlyInfo[i].Id" />
+                    </tr>
+                    <tr>
+                        <td id="month">July</td>
+                        <td><input id="MPAmount" asp-for="MonthlyInfo[i].MPAmount" placeholder="Monthly Premium Amount" /></td>
+                        <td><input id="SLCSP" asp-for="MonthlyInfo[i].SLCSP" placeholder="Second Lowest Cost Silver Plan" /></td>
+                        <td><input id="TaxCredit" asp-for="MonthlyInfo[i].TaxCredit" placeholder="Advanced Payment of Premium Tax Credit" /></td>
+                        <td><a class="btn btn-primary" id="copy">Copy</a></td>
+                        <input type="hidden" asp-for="MonthlyInfo[i].Id" />
+                    </tr>
+                    <tr>
+                        <td id="month">August</td>
+                        <td><input id="MPAmount" asp-for="MonthlyInfo[i].MPAmount" placeholder="Monthly Premium Amount" /></td>
+                        <td><input id="SLCSP" asp-for="MonthlyInfo[i].SLCSP" placeholder="Second Lowest Cost Silver Plan" /></td>
+                        <td><input id="TaxCredit" asp-for="MonthlyInfo[i].TaxCredit" placeholder="Advanced Payment of Premium Tax Credit" /></td>
+                        <td><a class="btn btn-primary" id="copy">Copy</a></td>
+                        <input type="hidden" asp-for="MonthlyInfo[i].Id" />
+                    </tr>
+                    <tr>
+                        <td id="month">September</td>
+                        <td><input id="MPAmount" asp-for="MonthlyInfo[i].MPAmount" placeholder="Monthly Premium Amount" /></td>
+                        <td><input id="SLCSP" asp-for="MonthlyInfo[i].SLCSP" placeholder="Second Lowest Cost Silver Plan" /></td>
+                        <td><input id="TaxCredit" asp-for="MonthlyInfo[i].TaxCredit" placeholder="Advanced Payment of Premium Tax Credit" /></td>
+                        <td><a class="btn btn-primary" id="copy">Copy</a></td>
+                        <input type="hidden" asp-for="MonthlyInfo[i].Id" />
+                    </tr>
+                    <tr>
+                        <td id="month">October</td>
+                        <td><input id="MPAmount" asp-for="MonthlyInfo[i].MPAmount" placeholder="Monthly Premium Amount" /></td>
+                        <td><input id="SLCSP" asp-for="MonthlyInfo[i].SLCSP" placeholder="Second Lowest Cost Silver Plan" /></td>
+                        <td><input id="TaxCredit" asp-for="MonthlyInfo[i].TaxCredit" placeholder="Advanced Payment of Premium Tax Credit" /></td>
+                        <td><a class="btn btn-primary" id="copy">Copy</a></td>
+                        <input type="hidden" asp-for="MonthlyInfo[i].Id" />
+                    </tr>
+                    <tr>
+                        <td id="month">November</td>
+                        <td><input id="MPAmount" asp-for="MonthlyInfo[i].MPAmount" placeholder="Monthly Premium Amount" /></td>
+                        <td><input id="SLCSP" asp-for="MonthlyInfo[i].SLCSP" placeholder="Second Lowest Cost Silver Plan" /></td>
+                        <td><input id="TaxCredit" asp-for="MonthlyInfo[i].TaxCredit" placeholder="Advanced Payment of Premium Tax Credit" /></td>
+                        <td><a class="btn btn-primary" id="copy">Copy</a></td>
+                        <input type="hidden" asp-for="MonthlyInfo[i].Id" />
+                    </tr>
+                    <tr>
+                        <td id="month">December</td>
+                        <td><input id="MPAmount" asp-for="MonthlyInfo[i].MPAmount" placeholder="Monthly Premium Amount" /></td>
+                        <td><input id="SLCSP" asp-for="MonthlyInfo[i].SLCSP" placeholder="Second Lowest Cost Silver Plan" /></td>
+                        <td><input id="TaxCredit" asp-for="MonthlyInfo[i].TaxCredit" placeholder="Advanced Payment of Premium Tax Credit" /></td>
+                        <td><a class="btn btn-primary" id="copy">Copy</a></td>
+                        <input type="hidden" asp-for="MonthlyInfo[i].Id" />
+                    </tr> *@
+                
+                @*  <tr id="row-0">
+                <td>
+                <select id='gMonth1'>
+                <option value='' selected>--Select Month--</option>
+                <option value='1'>January</option>
+                <option value='2'>February</option>
+                <option value='3'>March</option>
+                <option value='4'>April</option>
+                <option value='5'>May</option>
+                <option value='6'>June</option>
+                <option value='7'>July</option>
+                <option value='8'>August</option>
+                <option value='9'>September</option>
+                <option value='10'>October</option>
+                <option value='11'>November</option>
+                <option value='12'>December</option>
+                </select>
+                </td>
+                <td><input id="MPAmount" placeholder="Monthly Premium Amount" /></td>
+                <td><input id="SLCSP" placeholder="Second Lowest Cost Silver Plan" /></td>
+                <td><input id="TaxCredit" placeholder="Advanced Payment of Premium Tax Credit" /></td>
+                <td><button id="addRow" type="button">Add Row</button></td>
+                </tr> *@
+            </tbody>
+        </table>
+        <button class="btn btn-primary" type="button" id="back-3">Back</button>
+        <button class="btn btn-primary" id="continue-3" onclick="UpdateData();">submit</button>
+       @*  <button class="btn btn-primary" asp-action="Update" asp-controller="TaxPayer">Update</button> *@
+        <h4 id="message" class="text-danger"></h4>
+    </div>
+    @*  </form> *@
+</div>
+</div>
+<script src="~/js/taxpayer.js"></script>
+

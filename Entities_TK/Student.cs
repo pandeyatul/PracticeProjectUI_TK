@@ -10,6 +10,7 @@ namespace Entities_TK
     {
         public int Id { get; set; }
         public string? Name { get; set; }
+        public int AddressId { get; set; }
         public Address PermanentAddress { get; set; } = new Address();
         public ICollection<StudentSkill> StudentSkills { get; set; } = new List<StudentSkill>();
     }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PracticeProjectUI_TK.Data;
 
@@ -11,9 +12,10 @@ using PracticeProjectUI_TK.Data;
 namespace PracticeProjectUI_TK.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240803054731_addforeignkey")]
+    partial class addforeignkey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,36 +86,6 @@ namespace PracticeProjectUI_TK.Migrations
                     b.ToTable("countryTbl");
                 });
 
-            modelBuilder.Entity("Entities_TK.Monthly_Premium_Information", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<decimal?>("MPAmount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Month")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal?>("SLCSP")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal?>("TaxCredit")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int?>("TaxpayerId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TaxpayerId");
-
-                    b.ToTable("Monthly_Premium_Information");
-                });
-
             modelBuilder.Entity("Entities_TK.Skills", b =>
                 {
                     b.Property<int>("Id")
@@ -139,7 +111,10 @@ namespace PracticeProjectUI_TK.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CountryID")
+                    b.Property<int?>("CountryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Country_ID")
                         .HasColumnType("int");
 
                     b.Property<string>("State_Name")
@@ -147,7 +122,7 @@ namespace PracticeProjectUI_TK.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CountryID");
+                    b.HasIndex("CountryId");
 
                     b.ToTable("stateTbl");
                 });
@@ -191,31 +166,6 @@ namespace PracticeProjectUI_TK.Migrations
                     b.ToTable("StudentSkill");
                 });
 
-            modelBuilder.Entity("Entities_TK.Taxpayer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Identifier")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IsReceiveForm1095")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Policynumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TaxpayerTbl");
-                });
-
             modelBuilder.Entity("Entities_TK.Users", b =>
                 {
                     b.Property<int>("Id")
@@ -248,20 +198,11 @@ namespace PracticeProjectUI_TK.Migrations
                     b.Navigation("State");
                 });
 
-            modelBuilder.Entity("Entities_TK.Monthly_Premium_Information", b =>
-                {
-                    b.HasOne("Entities_TK.Taxpayer", null)
-                        .WithMany("MonthlyInfo")
-                        .HasForeignKey("TaxpayerId");
-                });
-
             modelBuilder.Entity("Entities_TK.State", b =>
                 {
                     b.HasOne("Entities_TK.Country", "Country")
                         .WithMany("Statelist")
-                        .HasForeignKey("CountryID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CountryId");
 
                     b.Navigation("Country");
                 });
@@ -314,11 +255,6 @@ namespace PracticeProjectUI_TK.Migrations
             modelBuilder.Entity("Entities_TK.Student", b =>
                 {
                     b.Navigation("StudentSkills");
-                });
-
-            modelBuilder.Entity("Entities_TK.Taxpayer", b =>
-                {
-                    b.Navigation("MonthlyInfo");
                 });
 #pragma warning restore 612, 618
         }

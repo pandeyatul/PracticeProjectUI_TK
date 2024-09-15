@@ -9,8 +9,6 @@ namespace Entities_TK
 {
     public class InterfaceCollection
     {
-
-        
             public ICity City { get; }
             public ICountry Country { get; }
             public IState State { get; }

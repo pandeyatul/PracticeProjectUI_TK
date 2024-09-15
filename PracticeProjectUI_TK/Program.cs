@@ -3,6 +3,8 @@ using PracticeProjectUI_TK.Data;
 using Entities_TK.Interface;
 using TK_Repository;
 using Entities_TK;
+using AutoMapper;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +20,7 @@ builder.Services.AddScoped<IState, StateRepository>();
 builder.Services.AddScoped<ICity, CityRepository>();
 builder.Services.AddScoped<IStudent, StudentRepo>();
 builder.Services.AddScoped<ISkill, SkillRepo>();
+
 builder.Services.AddTransient<IUsers, UserRepository>();
 builder.Services.AddTransient<IUtility, UtilityRepository>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -26,6 +29,8 @@ builder.Services.AddSession(option =>
     option.IdleTimeout = TimeSpan.FromMinutes(10);
     option.Cookie.HttpOnly = true;
 });
+// Register AutoMapper
+builder.Services.AddAutoMapper(typeof(Program));
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -35,6 +40,21 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+//app.Use(async(context, next)=>{
+//    string cookies = string.Empty;
+//    if (context.Request.Cookies.TryGetValue("Language",out cookies!))
+//    {
+//        Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(cookies);
+//        Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(cookies);
+//    }
+//    else
+//    {
+//        Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en");
+//        Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
+//    }
+//    await next.Invoke();
+//});
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseSession();
@@ -43,6 +63,7 @@ app.UseAuthorization();
 app.UseAuthentication();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=User}/{action=Login}/{id?}");
+    pattern: "{controller=TaxPayer}/{action=Save}/{id?}");
 
 app.Run();
+ 

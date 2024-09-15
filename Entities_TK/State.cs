@@ -10,8 +10,8 @@ namespace Entities_TK
     {
         public int Id { get; set; }
         public string? State_Name { get; set; }
-        public int Country_ID { get; set; }
-        public Country? Countries { get; set; }
+        public int CountryID { get; set; }
+        public Country? Country { get; set; }
         public ICollection<City> City { get; set; } = new HashSet<City>();
     }
 }
