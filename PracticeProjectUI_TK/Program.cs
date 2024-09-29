@@ -63,7 +63,7 @@ app.UseAuthorization();
 app.UseAuthentication();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=TaxPayer}/{action=Save}/{id?}");
+    pattern: "{controller=Form1099Misc}/{action=Form1040sc}/{id?}");
 
 app.Run();
  

@@ -10,50 +10,83 @@ namespace CleanStudentManagementUI.Controllers
         private readonly IStudentService _studentService;
         private readonly IExamService _examService;
         private readonly IQnAnsService _IqService;
-        public StudentController(IStudentService studentService, IExamService examService, IQnAnsService nsService)
+        private readonly IUtility _utility;
+
+        public string ContainerName = "StudentImage";
+        public string CvContainerName = "StudentCV";
+        public StudentController(IStudentService studentService, IExamService examService, IQnAnsService nsService, IUtility utility)
         {
             _studentService = studentService;
             _examService = examService;
             _IqService = nsService;
+            _utility = utility;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int pageno = 1, int pagesize = 2)
         {
-           // var students = _studentService.GetAll();
-            return View();
+            var students = _studentService.GetAllStudents(pageno, pagesize);
+            return View(students);
         }
         public IActionResult Create()
         {
             return View();
         }
-        [HttpPost]
-        public async Task<IActionResult> Create(StudentViewModel viewModel)
+        [HttpGet]
+        public IActionResult Profile()
         {
-            var isAdded =await _studentService.AddStudent(viewModel);
-            if (isAdded>0)
-            {                return RedirectToAction("Index");
+            var sessiondata = HttpContext.Session.GetString("logindetails");
+            if (sessiondata != null)
+            {
+                var usermodel = JsonConvert.DeserializeObject<LoginViewModel>(sessiondata);
+                var studentinfo = _studentService.StudentById(usermodel.Id);
+                return View(studentinfo);
+            }
+            return RedirectToAction("Account", "Login");
+        }
+        [HttpPost]
+        public async Task<IActionResult> Profile(StudentViewModel viewModel)
+        {
+            if (viewModel.ProfilePictureUrl != null)
+            {
+                viewModel.ProfilePicture = await _utility.SaveImage(ContainerName, viewModel.ProfilePictureUrl);
+            }
+            if (viewModel.CVFileUrl != null)
+            {
+                viewModel.CVFileName = await _utility.SaveImage(CvContainerName, viewModel.CVFileUrl);
+            }
+            _studentService.UpdateProfile(viewModel);
+
+            return RedirectToAction("Profile");
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateStudentModel viewModel)
+        {
+            var isAdded = await _studentService.AddStudent(viewModel);
+            if (isAdded > 0)
+            {
+                return RedirectToAction("Index");
             }
             return View(viewModel);
         }
-        public IActionResult AttendanceInExam()
+        public IActionResult AttendExam()
         {
             var model = new StudentAttendanceViewModel();
-            string strobj = HttpContext.Session.GetString("logindetails")??string.Empty;
-            LoginViewModel sessiondata=JsonConvert.DeserializeObject<LoginViewModel>(strobj);
-            if(sessiondata!=null)
+            string strobj = HttpContext.Session.GetString("logindetails") ?? string.Empty;
+            LoginViewModel sessiondata = JsonConvert.DeserializeObject<LoginViewModel>(strobj);
+            if (sessiondata != null)
             {
-                model.StudentId=sessiondata.Id;
-                var todayExam = _examService.GetAll().FirstOrDefault(x=>x.StartDate==DateTime.Today.Date);
-                if (todayExam==null)
+                model.StudentId = sessiondata.Id;
+                var todayExam = _examService.GetAll().Where(x => x.StartDate <= DateTime.Today.Date).FirstOrDefault();
+                if (todayExam == null)
                 {
                     model.Message = "No Exam Schedule for today";
                 }
                 else
                 {
-                    bool IsAttend = _IqService.IsAttendExam(todayExam.Id,model.StudentId);
+                    bool IsAttend = _IqService.IsAttendExam(todayExam.Id, model.StudentId);
                     if (!IsAttend)
                     {
-                        model.QuesAnsList = _IqService.GetAllByExamId(todayExam.Id).ToList();
+                        model.QuesList = _IqService.GetAllByExamId(todayExam.Id).ToList();
                         model.ExamName = todayExam.Title;
                     }
                     else
@@ -63,7 +96,7 @@ namespace CleanStudentManagementUI.Controllers
                 }
                 return View(model);
             }
-            return RedirectToAction("Login","Account");
+            return RedirectToAction("Login", "Account");
         }
         [HttpPost]
         public IActionResult AttendExam(StudentAttendanceViewModel studentAttendance)
@@ -71,11 +104,17 @@ namespace CleanStudentManagementUI.Controllers
             bool result = _IqService.SetExamResult(studentAttendance);
             return View();
         }
-        public IActionResult Result(int Studentid)
+        public IActionResult ExamResultView()
         {
-            var result = _studentService.GetResult(Studentid);
-            return View();
+            string strobj = HttpContext.Session.GetString("logindetails") ?? string.Empty;
+            LoginViewModel sessiondata = JsonConvert.DeserializeObject<LoginViewModel>(strobj);
+            if (sessiondata != null)
+            {
+                var result = _studentService.GetExamResult(sessiondata.Id);
+                return View(result);
+            }
+            return RedirectToAction("Login","Account");
         }
     }
-    
+
 }

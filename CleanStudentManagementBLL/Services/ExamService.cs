@@ -11,9 +11,8 @@ namespace CleanStudentManagementBLL.Services
 {
     public class ExamService : IExamService
     {
-        private readonly UnitOfWork _unitofwork;
-
-        public ExamService(UnitOfWork unitofwork)
+        private readonly IUnitofWork _unitofwork;
+        public ExamService(IUnitofWork unitofwork)
         {
             _unitofwork = unitofwork;
         }
@@ -34,16 +33,16 @@ namespace CleanStudentManagementBLL.Services
         
         public IEnumerable<ExamViewModel> GetAll()
         {
-            var allexam =_unitofwork.genericRepo<Exam>().GetAll();
+            var allexam =_unitofwork.genericRepo<Exam>().GetAll(IncludeProerties: "groups").ToList();
             List<ExamViewModel> Examlist = listinfo(allexam);
-            return Examlist;
+            return Examlist; 
         }
 
         public PageResult<ExamViewModel> GetAllExam(int pagenumber, int pagesize)
         {
             int excluderecords = (pagenumber * pagesize) - pagesize;
             List<ExamViewModel> examlist = new List<ExamViewModel>();
-            var exams = _unitofwork.genericRepo<Exam>().GetAll().Skip(excluderecords).Take(pagesize);
+            var exams = _unitofwork.genericRepo<Exam>().GetAll(IncludeProerties: "groups").Skip(excluderecords).Take(pagesize);
             examlist = listinfo(exams);
 
             var result = new PageResult<ExamViewModel>

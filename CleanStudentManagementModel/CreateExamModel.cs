@@ -25,7 +25,7 @@ namespace CleanStudentManagementModel
                 Description= examModel.Description,
                 StartDate= examModel.StartDate,
                 Period= examModel.Period,
-                Groupid= examModel.Groupid,
+                groupsId = examModel.Groupid,
 
             };
         }

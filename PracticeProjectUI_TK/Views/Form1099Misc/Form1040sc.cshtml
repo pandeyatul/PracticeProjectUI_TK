@@ -1,0 +1,260 @@
+﻿ @model PracticeProjectUI_TK.Models.ViewModels.Form1040scViewModel
+
+@{
+    ViewData["Title"] = "Form1040sc";
+}
+
+<h1>Form1040sc</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form id="form1040scId">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           
+            <div class="form-group">
+                <label asp-for="NameofProprietor" class="control-label"></label>
+                <input asp-for="NameofProprietor" id="NameofProprietor" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="NameofBusiness" class="control-label"></label>
+                <input asp-for="NameofBusiness" id="NameofBusiness" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="PrincipalBusinessorProfession" class="control-label"></label>
+                <input asp-for="PrincipalBusinessorProfession" id="PrincipalBusinessorProfession" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="BusinessCode" class="control-label"></label>
+                <input id="BusinessCode" asp-for="BusinessCode" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="EmployerIDNumber" class="control-label"></label>
+                <input class="form-control" id="EmployerIDNumber" asp-for="EmployerIDNumber" />
+            </div>
+            <div class="form-group">
+                <label asp-for="BusinessAddress" class="control-label"></label>
+                <input asp-for="BusinessAddress" id="BusinessAddress" class="form-control"  />
+            </div>
+            <div class="form-group">
+                <label asp-for="AccountingMethod" class="control-label"></label>
+                <input asp-for="AccountingMethod" id="AccountingMethod" class="form-control" />
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsMateriallyParticipate" id="IsMateriallyParticipate" /> @Html.DisplayNameFor(model => model.IsMateriallyParticipate)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsStartedorAcquired" id="IsStartedorAcquired" /> @Html.DisplayNameFor(model => model.IsStartedorAcquired)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="DidYouMakeAnyPayments" id="DidYouMakeAnyPayments" /> @Html.DisplayNameFor(model => model.DidYouMakeAnyPayments)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="WillYouFileRequiredForm1099" id="WillYouFileRequiredForm1099" /> @Html.DisplayNameFor(model => model.WillYouFileRequiredForm1099)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Statutoryemployee" id="Statutoryemployee" /> @Html.DisplayNameFor(model => model.Statutoryemployee)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="GrossReceiptsorSales" class="control-label"></label>
+                <input asp-for="GrossReceiptsorSales" id="GrossReceiptsorSales" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ReturnsAndAllowances" class="control-label"></label>
+                <input asp-for="ReturnsAndAllowances" id="ReturnsAndAllowances" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="OtherIncome" class="control-label"></label>
+                <input asp-for="OtherIncome" id="OtherIncome" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="InvestmentActivity" class="control-label"></label>
+                <input asp-for="InvestmentActivity" id="InvestmentActivity" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="MethodUsedToClosingInventory" class="control-label"></label>
+                <input asp-for="MethodUsedToClosingInventory" id="MethodUsedToClosingInventory" class="form-control" />
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="WasanyChangeinDeterminingQuantities" id="WasanyChangeinDeterminingQuantities" /> @Html.DisplayNameFor(model => model.WasanyChangeinDeterminingQuantities)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="InventoryatBeginningofYear" class="control-label"></label>
+                <input asp-for="InventoryatBeginningofYear" id="InventoryatBeginningofYear" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Purchases" class="control-label"></label>
+                <input asp-for="Purchases" id="Purchases" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CostofLabor" class="control-label"></label>
+                <input asp-for="CostofLabor" id="CostofLabor" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="MaterialsAndSuppliesCost" class="control-label"></label>
+                <input asp-for="MaterialsAndSuppliesCost" id="MaterialsAndSuppliesCost" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="OtherCosts" class="control-label"></label>
+                <input asp-for="OtherCosts" id="OtherCosts" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="InventoryatEndofYear" class="control-label"></label>
+                <input asp-for="InventoryatEndofYear" id="InventoryatEndofYear" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="DateVehicleWasPlacedInService" class="control-label"></label>
+                <input asp-for="DateVehicleWasPlacedInService" id="DateVehicleWasPlacedInService" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="MilesDrivenForBusiness" class="control-label"></label>
+                <input asp-for="MilesDrivenForBusiness" id="MilesDrivenForBusiness" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="CommutingMiles" class="control-label"></label>
+                <input asp-for="CommutingMiles" id="CommutingMiles" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="OtherMiles" class="control-label"></label>
+                <input asp-for="OtherMiles" id="OtherMiles" class="form-control" />
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsVehicleAvailableForPersonalUse" id="IsVehicleAvailableForPersonalUse" /> @Html.DisplayNameFor(model => model.IsVehicleAvailableForPersonalUse)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsAnotherVehicleForPersonalUse" id="IsAnotherVehicleForPersonalUse" /> @Html.DisplayNameFor(model => model.IsAnotherVehicleForPersonalUse)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsEvidence" id="IsEvidence" /> @Html.DisplayNameFor(model => model.IsEvidence)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsEvidenceWriten" id="IsEvidenceWriten" /> @Html.DisplayNameFor(model => model.IsEvidenceWriten)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Advertising" class="control-label"></label>
+                <input asp-for="Advertising" id="Advertising" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="CarAndTruckExpenses" class="control-label"></label>
+                <input asp-for="CarAndTruckExpenses" id="CarAndTruckExpenses" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="DepreciationExpenseDeduction" class="control-label"></label>
+                <input asp-for="DepreciationExpenseDeduction" id="DepreciationExpenseDeduction" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Insurance" class="control-label"></label>
+                <input asp-for="Insurance" id="Insurance" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Interest" class="control-label"></label>
+                <input asp-for="Interest" id="Interest" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="LegalProfessionalServices" class="control-label"></label>
+                <input asp-for="LegalProfessionalServices" id="LegalProfessionalServices" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="PensionProfitSharingPlans" class="control-label"></label>
+                <input asp-for="PensionProfitSharingPlans" id="PensionProfitSharingPlans" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ContractLabor" class="control-label"></label>
+                <input asp-for="ContractLabor" id="ContractLabor" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="EmployeeBenefitPrograms" class="control-label"></label>
+                <input asp-for="EmployeeBenefitPrograms" id="EmployeeBenefitPrograms" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="TaxesLicenses" class="control-label"></label>
+                <input asp-for="TaxesLicenses" id="TaxesLicenses" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Travel" class="control-label"></label>
+                <input asp-for="Travel" id="Travel" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="RentorLease" class="control-label"></label>
+                <input asp-for="RentorLease" id="RentorLease" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="RepairsMaintenance" class="control-label"></label>
+                <input asp-for="RepairsMaintenance" id="RepairsMaintenance" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="DeductibleMeals" class="control-label"></label>
+                <input asp-for="DeductibleMeals" id="DeductibleMeals" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="OfficeExpenses" class="control-label"></label>
+                <input asp-for="OfficeExpenses" id="OfficeExpenses" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Utilities" class="control-label"></label>
+                <input asp-for="Utilities" id="Utilities" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="CommissionsFees" class="control-label"></label>
+                <input asp-for="CommissionsFees" id="CommissionsFees" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="EnergyEfficient" class="control-label"></label>
+                <input asp-for="EnergyEfficient" id="EnergyEfficient" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Wages" class="control-label"></label>
+                <input asp-for="Wages" id="Wages" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Depletion" class="control-label"></label>
+                <input asp-for="Depletion" class="form-control" />
+                <span asp-validation-for="Depletion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OtherExpenses" class="control-label"></label>
+                <input asp-for="OtherExpenses" id="OtherExpenses" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="BusinessExpenses" class="control-label"></label>
+                <input asp-for="BusinessExpenses" id="BusinessExpenses" class="form-control" />
+            </div>
+            <div class="form-group">
+                @* <input type="submit" value="Submit" class="btn btn-primary" /> *@
+                <button type="button" class="btn btn-primary" onclick="SubmitData();">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+<script src="~/js/form1040sc.js"></script>

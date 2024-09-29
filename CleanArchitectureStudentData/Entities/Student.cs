@@ -14,9 +14,10 @@ namespace CleanArchitectureStudentData.Entities
         public string UserName { get; set; }=string.Empty;  
         public string Password { get; set; } = string.Empty; 
         public string ContactNo { get; set; } = string.Empty;
-       
-        public int groupId { get; set; }
-        public virtual Groups Groups { get; set; }
-       public virtual ICollection<ExamResult> ExamResults { get; set; }=new List<ExamResult>();
+        public string? CVFileName { get; set; }
+        public string? ProfilePicture { get; set; }
+        public int? groupId { get; set; }
+        public virtual Groups group { get; set; }
+        public virtual ICollection<ExamResult> ExamResults { get; set; }
     }
 }

@@ -1,10 +1,13 @@
 ﻿using CleanStudentManagementBLL.Services;
 using CleanStudentManagementModel;
+using CleanStudentManagementUI.Filter;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CleanStudentManagementUI.Controllers
 {
+    [RoleAuthorize(2)]
     public class ExamController : Controller
     {
         private readonly IGroupService _groupservices;
@@ -16,16 +19,16 @@ namespace CleanStudentManagementUI.Controllers
             _examservices = examservices;
         }
 
-        public IActionResult Index(int pageno=1,int pagesize=10)
+        public IActionResult Index(int pageno = 1, int pagesize = 3)
         {
-            var examdata = _examservices.GetAllExam(pageno,pagesize);
+            var examdata = _examservices.GetAllExam(pageno, pagesize);
             return View(examdata);
         }
         [HttpGet]
         public IActionResult Create()
         {
-            var groups=_groupservices.GetAllGroups();
-            ViewBag.GetAllgrps = new SelectList(groups,"Id","Name");
+            var groups = _groupservices.GetAllGroups();
+            ViewBag.GetAllgrps = new SelectList(groups, "Id", "Name");
             return View();
         }
         [HttpPost]

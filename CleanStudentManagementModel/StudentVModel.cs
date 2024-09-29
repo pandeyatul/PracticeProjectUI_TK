@@ -11,10 +11,12 @@ namespace CleanStudentManagementModel
     {   
         public int Id { get; set; }
         public string Name { get; set; }=string.Empty;
+        public int? GroupId { get; set; }
         public StudentVModel(Student student)
         {
             Id = student.Id;
             Name = student.Name;
+            GroupId = student.groupId;
         }
     }
     public class Checkboxtable

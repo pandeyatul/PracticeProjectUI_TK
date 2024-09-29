@@ -12,6 +12,7 @@ namespace CleanArchitectureStudentData.Entities
         public string QuestionTitle { get; set; } = string.Empty;
         public int Examid { get; set; }
         public virtual Exam Exam { get; set; }
+        public ICollection<ExamResult> ExamResults { get; set; }=new List<ExamResult>();
         public string Answer { get; set; } = string.Empty;
         public string OptionA { get; set; } = string.Empty;
         public string OptionB{ get; set; } = string.Empty;

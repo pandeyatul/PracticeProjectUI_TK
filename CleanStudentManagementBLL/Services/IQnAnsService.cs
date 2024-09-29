@@ -9,10 +9,10 @@ namespace CleanStudentManagementBLL.Services
 {
     public interface IQnAnsService
     {
-        void Add(CreateQAnsViewModel createQAnsView);
-        PageResult<CreateQAnsViewModel> GetAllQans(int pagenumber,int pagesize);
-        bool IsAttendExam(int ExamId,int Studentid);
-        IEnumerable<CreateQAnsViewModel> GetAllByExamId(int examid);
+        void Add(QAnsViewModel createQAnsView);
+        PageResult<QAnsViewModel> GetAllQans(int pagenumber,int pagesize);
+        bool IsAttendExam(int ExamId, int Studentid);
+        IEnumerable<QAnsViewModel> GetAllByExamId(int examid);
         bool SetExamResult(StudentAttendanceViewModel studentAttendance);
     }
 }
