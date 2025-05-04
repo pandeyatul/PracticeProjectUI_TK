@@ -11,7 +11,7 @@ namespace CleanStudentManagementModel
     {
         public int StudentId { get; set; }
         public string ExamName { get; set;}=string.Empty;
-        public List<CreateQAnsViewModel> QuesAnsList { get; set; }=new List<CreateQAnsViewModel>();
+        public List<QAnsViewModel> QuesList { get; set; }=new List<QAnsViewModel>();
         public string Message { get; set; } = string.Empty;
     }
 }

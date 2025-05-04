@@ -12,9 +12,9 @@ namespace CleanStudentManagementBLL.Services
 {
     public class GroupService : IGroupService
     {
-        private readonly UnitOfWork _unitofwork;
+        private readonly IUnitofWork _unitofwork;
 
-        public GroupService(UnitOfWork unitofwork)
+        public GroupService(IUnitofWork unitofwork)
         {
             _unitofwork = unitofwork;
         }

@@ -10,5 +10,7 @@
     <ProjectReference Include="..\CleanArchitectureStudentData\CleanArchitectureStudentData.csproj" />
     <ProjectReference Include="..\CleanStudentManagementModel\CleanStudentManagementModel.csproj" />
   </ItemGroup>
-
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
 </Project>

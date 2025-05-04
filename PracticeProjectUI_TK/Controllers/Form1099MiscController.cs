@@ -49,5 +49,14 @@ namespace PracticeProjectUI_TK.Controllers
             };
             return Json(recipients);
         }
+        public IActionResult Form1040sc()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Form1040sc(Form1040scViewModel model)
+        {
+            return View();
+        }
     }
 }

@@ -15,19 +15,19 @@ namespace CleanStudentManagementUI.Controllers
             _iqnAnsservice = iqnAnsservice;
         }
 
-        public IActionResult Index(int pageno=1, int pagesize=10)
+        public IActionResult Index(int pageno=1, int pagesize=3)
         {
-            var queslist = _iqnAnsservice.GetAllQans(pageno,pagesize);
+            var queslist = _iqnAnsservice.GetAllQans(pageno, pagesize);
             return View(queslist);
         }
         public IActionResult Create()
         {
             var exams = _examservice.GetAll();
-            ViewBag.Examlist = new SelectList(exams,"Id","Title");
+            ViewBag.Examlist = new SelectList(exams, "Id", "Title");
             return View();
         }
         [HttpPost]
-        public IActionResult Create(CreateQAnsViewModel ansViewModel)
+        public IActionResult Create(QAnsViewModel ansViewModel)
         {
             _iqnAnsservice.Add(ansViewModel);
             return RedirectToAction("Index");

@@ -15,33 +15,26 @@ namespace CleanStudentManagementModel
         public string UserName { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
         public string ContactNo { get; set; } = string.Empty;
-        //public IFormFile? CVFileName { get; set; }
-        //public IFormFile? ProfilePicture { get; set; }
+        public string? CVFileName { get; set; }
+        public IFormFile? CVFileUrl { get; set; }
+        public string? ProfilePicture { get; set; }
+        public IFormFile? ProfilePictureUrl { get; set; }
         public int groupId { get; set; }
+        public StudentViewModel()
+        {
+            
+        }
         public StudentViewModel(Student student)
         {
-            Id=student.Id;
-            Name=student.Name;
-            UserName=student.UserName;
-            Password=student.Password;
-            ContactNo=student.ContactNo;
-            //CVFileName=student.CVFileName;
-            //ProfilePicture=student.ProfilePicture;
-            groupId=student.groupId;
+            Id = student.Id;
+            Name = student.Name;
+            UserName = student.UserName;
+            Password = student.Password;
+            ContactNo = student.ContactNo;
+            CVFileName = student.CVFileName;
+            ProfilePicture = student.ProfilePicture;
+           // groupId = (int)student.groupId;
         }
-        public Student ConverToModel(StudentViewModel student)
-        {
-            return new Student
-            {
-                Id=student.Id,
-                Name=student.Name,
-                UserName=student.UserName,
-                Password=student.Password,
-                ContactNo=student.ContactNo,
-                //CVFileName=student.CVFileName,
-                //ProfilePicture=student.ProfilePicture,
-                groupId=student.groupId
-            };
-        }
+        
     }
 }

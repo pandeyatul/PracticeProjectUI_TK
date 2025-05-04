@@ -1,0 +1,80 @@
+﻿@model PageResult<CleanStudentManagementModel.QAnsViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<p>
+    <a asp-action="Create">Create New Exam Paper</a>
+</p>
+<table class="table">
+    <thead>
+        <tr> 
+            <th>
+                Quest Title
+            </th>
+            
+            <th>
+               Answer
+            </th>
+            <th>
+                Option A
+            </th>
+            <th>
+                Option B
+            </th>
+            <th>
+               Option C
+            </th>
+            <th>
+               Option D
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.data != null)
+        {
+            @foreach (var item in Model.data)
+            {
+                <tr> 
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QuestionTitle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Answer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OptionA)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OptionB)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OptionC)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OptionD)
+                    </td>
+                   @*  <td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td> *@
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<cs-pager cs-paging-pagesize=(int)Model.PageSize
+          cs-paging-pagenumber=(int)Model.PageNumber
+          cs-paging-totalitems=(int)Model.TotalItem
+          cs-pagenumber-param="pageNumber"
+          asp-controller="QuesAns"
+          asp-action="Index"
+          cs-pager-li-current-class="page-item active"
+          cs-pager-li-other-class="page-item"
+          cs-pager-li-non-active-class="page-item disabled"
+          cs-pager-link-current-class="page-link"
+          cs-pager-link-other-class="page-link">
+</cs-pager>

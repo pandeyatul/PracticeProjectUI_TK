@@ -75,7 +75,7 @@ namespace CleanStudentManagementBLL.Services
             if (model.Role == (int)Roles.Teacher || model.Role == (int)Roles.Admin)
             {
 
-                var user = _unitofwork.genericRepo<Users>().GetAll().FirstOrDefault(x => x.UserName == model.UserName && x.Passwprd == model.Passwprd && x.Role == model.Role);
+                var user = _unitofwork.genericRepo<Users>().GetAll().FirstOrDefault(x => x.UserName == model.UserName && x.Passwprd == model.Password && x.Role == model.Role);
                 if (user != null)
                 {
                     model.Id = user.Id;
@@ -84,7 +84,7 @@ namespace CleanStudentManagementBLL.Services
             }
             else
             {
-                var student = _unitofwork.genericRepo<Student>().GetAll().FirstOrDefault(x => x.UserName == model.UserName && x.Password == model.Passwprd);
+                var student = _unitofwork.genericRepo<Student>().GetAll().FirstOrDefault(x => x.UserName == model.UserName && x.Password == model.Password);
                 if (student != null)
                 {
                     model.Id = student.Id;

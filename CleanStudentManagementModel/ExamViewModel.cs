@@ -14,7 +14,7 @@ namespace CleanStudentManagementModel
         public string Description { get; set; } = string.Empty;
         public DateTime StartDate { get; set; }
         public int Period { get; set; }
-        public int Groupid { get; set; }
+        public string GroupName { get; set; }
 
         public ExamViewModel(Exam exam)
         {
@@ -23,7 +23,7 @@ namespace CleanStudentManagementModel
             Description = exam.Description;
             StartDate = exam.StartDate;
             Period = exam.Period;
-            Groupid = exam.Groupid;
+            GroupName = exam.groups.Name??string.Empty;
         }
     }
 }

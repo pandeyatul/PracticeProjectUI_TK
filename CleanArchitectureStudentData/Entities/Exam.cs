@@ -13,10 +13,10 @@ namespace CleanArchitectureStudentData.Entities
         public string Description { get; set; }= string.Empty;
         public DateTime StartDate { get; set; }
         public int Period { get; set; }
-        public int Groupid { get; set; }
+        public int groupsId { get; set; }
         public virtual Groups groups { get; set; }
-        public virtual ICollection<ExamResult> Results { get; set; }
-        public virtual ICollection<QuesAnswer> Ques { get; set; }
+        public virtual ICollection<ExamResult> examResults { get; set; }= new List<ExamResult>();
+        public virtual ICollection<QuesAnswer> Ques { get; set; } = new List<QuesAnswer>();
 
     }
 }

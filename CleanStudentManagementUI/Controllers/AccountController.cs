@@ -1,6 +1,10 @@
 ﻿using CleanStudentManagementBLL.Services;
 using CleanStudentManagementModel;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Mail;
+using System.Security.Claims;
 using System.Text.Json;
 
 namespace CleanStudentManagementUI.Controllers
@@ -13,24 +17,61 @@ namespace CleanStudentManagementUI.Controllers
         {
             _accountservice = accountservice;
         }
-        
-        public IActionResult Login(LoginViewModel model)
+        public IActionResult Login()
         {
-            LoginViewModel lvm=_accountservice.Login(model);
-            if(lvm != null)
-            {
-                string sessionobj=JsonSerializer.Serialize(lvm);
-                HttpContext.Session.SetString("logindetails",sessionobj);
-                return RedirectToUser(lvm);
-            }
+           // var Isemail = IsValidEmail("atulp@chetu.com");
             return View();
         }
+        public bool IsValidEmail(string emailaddress)
+        {
+            try
+            {
+                MailAddress m = new MailAddress(emailaddress);
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                LoginViewModel lvm = _accountservice.Login(model);
+                if (lvm != null)
+                {
+                    string sessionobj = JsonSerializer.Serialize(lvm);
+                    HttpContext.Session.SetString("logindetails", sessionobj);
+                    var claims = new List<Claim>()
+                {
+                    new Claim(ClaimTypes.Name,model.UserName)
+                };
+                    var claimIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimIdentity));
 
+                    return RedirectToUser(lvm);
+                }
+            }
+                return View(model);
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login");
+        }
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
         private IActionResult RedirectToUser(LoginViewModel lvm)
         {
+            //int a = (int)Roles.Admin;
             if (lvm.Role==(int)Roles.Admin)
             {
-                return RedirectToAction("index","Users");
+                return RedirectToAction("Index","Users");
             }
             else if (lvm.Role==(int)Roles.Teacher)
             {
@@ -38,7 +79,7 @@ namespace CleanStudentManagementUI.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Student");
+                return RedirectToAction("Profile", "Student");
             }
         }
     }
